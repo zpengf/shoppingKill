@@ -244,6 +244,10 @@
             <artifactId>commons-lang3</artifactId>
             <version>${common-lang.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
 
     </dependencies>
 
