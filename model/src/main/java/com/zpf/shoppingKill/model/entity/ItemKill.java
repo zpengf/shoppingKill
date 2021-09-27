@@ -1,5 +1,7 @@
 package com.zpf.shoppingKill.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class ItemKill {
@@ -9,13 +11,37 @@ public class ItemKill {
 
     private Integer total;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date startTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 
     private Date endTime;
 
     private Byte isActive;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
+
+    private Integer canKill;
+
+    private String itemName;
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public Integer getCanKill() {
+        return canKill;
+    }
+
+    public void setCanKill(Integer canKill) {
+        this.canKill = canKill;
+    }
 
     public Integer getId() {
         return id;

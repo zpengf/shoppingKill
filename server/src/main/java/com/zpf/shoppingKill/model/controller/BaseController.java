@@ -20,22 +20,8 @@ public class BaseController {
 
     private static final Logger log = LoggerFactory.getLogger(BaseController.class);
 
-
-
-
-    //@RequestMapping(value = "/wel",method = RequestMethod.GET)
-    @GetMapping("/wel")
-    public String wel(){
-
-        return "222";
+    @RequestMapping(value = "/error",method = RequestMethod.GET)
+    public String error(){
+        return "error";
     }
-
-    @RequestMapping(value = "/reponse",method = RequestMethod.GET)
-    public BaseResponse response(){
-        BaseResponse baseResponse = new BaseResponse(StatusCode.Success);
-
-
-        return baseResponse;
-    }
-
 }

@@ -3,6 +3,7 @@ package com.zpf.shoppingKill.model.mapper;
 import com.zpf.shoppingKill.model.entity.ItemKill;
 import com.zpf.shoppingKill.model.entity.ItemKillExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface ItemKillMapper {
@@ -27,4 +28,9 @@ public interface ItemKillMapper {
     int updateByPrimaryKeySelective(ItemKill record);
 
     int updateByPrimaryKey(ItemKill record);
+
+    List<ItemKill> selectAll();
+
+    ItemKill selectByItemId(@Param("id") Integer id);
+
 }
