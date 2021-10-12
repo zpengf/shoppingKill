@@ -267,8 +267,17 @@
           end
       ) as canKill
       from item_kill ik left join item i on ik.item_id = i.id
-      where ik.is_active = 1 and and ik.item_id = {id}
+      where ik.is_active = 1 and ik.id = #{id}
 
   </select>
+
+
+  <!--抢购商品，剩余数量减一-->
+  <update id="updateKillItem">
+    UPDATE item_kill
+    SET total = total - 1
+    WHERE
+        id = #{killId}
+  </update>
 
 </mapper>

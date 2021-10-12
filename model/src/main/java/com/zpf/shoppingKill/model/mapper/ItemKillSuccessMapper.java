@@ -27,4 +27,8 @@ public interface ItemKillSuccessMapper {
     int updateByPrimaryKeySelective(ItemKillSuccess record);
 
     int updateByPrimaryKey(ItemKillSuccess record);
+
+
+    int countByKillUserId(@Param("killId") Integer killId, @Param("userId") Integer userId);
+
 }

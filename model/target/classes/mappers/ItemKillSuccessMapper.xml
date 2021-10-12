@@ -8,6 +8,8 @@
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+
+    <result column="total" property="total" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -225,4 +227,18 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where code = #{code,jdbcType=VARCHAR}
   </update>
+
+  <!--根据秒杀活动跟用户Id查询用户的抢购数量-->
+  <select id="countByKillUserId" resultType="java.lang.Integer">
+    SELECT
+    COUNT(1) AS total
+    FROM
+    item_kill_success
+    WHERE
+    user_id = #{userId}
+    AND kill_id = #{killId}
+    <!-- AND `status` IN (-1, 0) -->
+    AND `status` IN (0,1)
+  </select>
+
 </mapper>

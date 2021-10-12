@@ -55,7 +55,7 @@
 
             success: function(res){
                 if (res.code==0) {
-                    //alert(res.msg);
+                    alert(res.msg);
                     window.location.href="${ctx}/kill/execute/success"
                 }else{
                     //alert(res.msg);
@@ -71,13 +71,13 @@
 
     function getJsonData() {
         var killId=$("#killId").val();
-        /*var data = {
+        var data = {
             "killId":killId,
             "userId":1
-        };*/
-        var data = {
-            "killId":killId
         };
+        // var data = {
+        //     "killId":killId
+        // };
         return data;
     }
 </script>
