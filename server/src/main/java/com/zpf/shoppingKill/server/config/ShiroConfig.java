@@ -2,7 +2,7 @@ package com.zpf.shoppingKill.server.config;/**
  * Created by Administrator on 2019/7/2.
  */
 
-import com.debug.kill.server.service.CustomRealm;
+import com.zpf.shoppingKill.server.service.CustomRealm;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;

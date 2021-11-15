@@ -2,6 +2,8 @@ package com.zpf.shoppingKill.model.mapper;
 
 import com.zpf.shoppingKill.model.entity.ItemKillSuccess;
 import com.zpf.shoppingKill.model.entity.ItemKillSuccessExample;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,6 +31,11 @@ public interface ItemKillSuccessMapper {
     int updateByPrimaryKey(ItemKillSuccess record);
 
 
+    ItemKillSuccess queryByCode(@Param("code")String code);
+
     int countByKillUserId(@Param("killId") Integer killId, @Param("userId") Integer userId);
 
+    void expireOrder(@Param("code")String code);
+
+    ArrayList<ItemKillSuccess> selectAllPayOrder();
 }

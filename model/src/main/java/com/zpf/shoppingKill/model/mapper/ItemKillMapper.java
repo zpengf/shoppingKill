@@ -33,7 +33,12 @@ public interface ItemKillMapper {
 
     ItemKill selectByItemId(@Param("id") Integer id);
 
+    ItemKill selectByItemIdV2(@Param("id") Integer id);
+
 
     int updateKillItem(@Param("killId") Integer killId);
+
+
+    int updateKillItemV2(@Param("killId") Integer killId);
 
 }

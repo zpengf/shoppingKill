@@ -255,4 +255,20 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from user
+    where user_name = #{userName}
+  </select>
+
+
+
+  <select id="selectByUserPwd" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from user
+    where password = #{password}
+  </select>
+
 </mapper>

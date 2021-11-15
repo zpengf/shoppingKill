@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @ImportResource("classpath:spring/spring-jdbc.xml")
 @MapperScan(basePackages = "com.zpf.shoppingKill.model.mapper" )
-@EnableScheduling
+@EnableScheduling//允许 spring开启时间任务注解
 public class MainApplication extends SpringBootServletInitializer {
 
     @Override

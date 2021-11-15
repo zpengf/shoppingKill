@@ -71,6 +71,8 @@ public class RabbitmqConfig {
 
     @Bean
     public RabbitTemplate rabbitTemplate(){
+
+        //交换机 失败回调
         connectionFactory.setPublisherConfirms(true);
         connectionFactory.setPublisherReturns(true);
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
@@ -92,11 +94,14 @@ public class RabbitmqConfig {
 
 
     //构建异步发送邮箱通知的消息模型
+    // 邮箱队列
     @Bean
     public Queue successEmailQueue(){
         return new Queue(env.getProperty("mq.kill.item.success.email.queue"),true);
     }
 
+
+    //设置 交换机 主题交换机
     @Bean
     public TopicExchange successEmailExchange(){
         return new TopicExchange(env.getProperty("mq.kill.item.success.email.exchange"),true,false);
@@ -104,17 +109,23 @@ public class RabbitmqConfig {
 
     @Bean
     public Binding successEmailBinding(){
-        return BindingBuilder.bind(successEmailQueue()).to(successEmailExchange()).with(env.getProperty("mq.kill.item.success.email.routing.key"));
+        return BindingBuilder.bind(successEmailQueue()).to(successEmailExchange())
+                .with(env.getProperty("mq.kill.item.success.email.routing.key"));
     }
 
 
     //构建秒杀成功之后-订单超时未支付的死信队列消息模型
-
     @Bean
     public Queue successKillDeadQueue(){
         Map<String, Object> argsMap= Maps.newHashMap();
+        //设置成死信交换机
         argsMap.put("x-dead-letter-exchange",env.getProperty("mq.kill.item.success.kill.dead.exchange"));
+        //设置死信路由
         argsMap.put("x-dead-letter-routing-key",env.getProperty("mq.kill.item.success.kill.dead.routing.key"));
+
+        //如果在这里设置 ttl 很不灵活 需要在生产者那里去设置
+
+        //死信队列生成
         return new Queue(env.getProperty("mq.kill.item.success.kill.dead.queue"),true,false,false,argsMap);
     }
 
@@ -130,7 +141,7 @@ public class RabbitmqConfig {
         return BindingBuilder.bind(successKillDeadQueue()).to(successKillDeadProdExchange()).with(env.getProperty("mq.kill.item.success.kill.dead.prod.routing.key"));
     }
 
-    //真正的队列
+    //死信队列ttl过期后 消息给这个 真正的队列  就是个普通队列
     @Bean
     public Queue successKillRealQueue(){
         return new Queue(env.getProperty("mq.kill.item.success.kill.dead.real.queue"),true);

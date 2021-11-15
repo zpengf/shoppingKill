@@ -10,7 +10,7 @@
     <result column="is_active" property="isActive" jdbcType="TINYINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 
-    <result column="canKill" property="canKill" jdbcType="TIMESTAMP" />
+    <result column="can_kill" property="canKill" jdbcType="TIMESTAMP" />
 
     <result column="name" property="itemName"/>
   </resultMap>
@@ -265,11 +265,26 @@
           then 1
           else 0
           end
-      ) as canKill
+      ) as can_kill
       from item_kill ik left join item i on ik.item_id = i.id
       where ik.is_active = 1 and ik.id = #{id}
 
   </select>
+
+  <select id="selectByItemIdV2" parameterType="int" resultMap="BaseResultMap" >
+      select ik.*,i.name,
+      (case
+          when( now() between ik.start_time and ik.end_time)
+          then 1
+          else 0
+          end
+      ) as can_kill
+      from item_kill ik left join item i on ik.item_id = i.id
+      where ik.is_active = 1 and ik.id = #{id}
+      and ik.total > 0
+
+  </select>
+
 
 
   <!--抢购商品，剩余数量减一-->
@@ -279,5 +294,17 @@
     WHERE
         id = #{killId}
   </update>
+
+  <update id="updateKillItemV2">
+    UPDATE item_kill
+    SET total = total - 1
+    WHERE
+        id = #{killId}
+
+    and total > 0
+  </update>
+
+
+
 
 </mapper>

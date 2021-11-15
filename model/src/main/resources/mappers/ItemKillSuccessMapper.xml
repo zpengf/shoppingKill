@@ -10,6 +10,11 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 
     <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="item_name" property="itemName" jdbcType="VARCHAR" />
+    <result column="TIMESTAMPDIFF" property="timeStampDiff" jdbcType="INTEGER" />
+
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -92,6 +97,17 @@
     from item_kill_success
     where code = #{code,jdbcType=VARCHAR}
   </select>
+
+
+  <select id="queryByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select a.*,b.user_name,b.phone,b.email,c.name as item_name
+    from item_kill_success as a
+    left join user b on b.id = a.user_id
+    left join item c on c.id = a.item_id
+    where a.code = #{code}
+    and b.is_active = 1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from item_kill_success
     where code = #{code,jdbcType=VARCHAR}
@@ -237,8 +253,24 @@
     WHERE
     user_id = #{userId}
     AND kill_id = #{killId}
-    <!-- AND `status` IN (-1, 0) -->
     AND `status` IN (0,1)
   </select>
+
+  <update id="expireOrder" parameterType="java.lang.String">
+    update item_kill_success
+    set  status = -1
+    where code = #{code} and status = 0
+  </update>
+
+
+  <select id="selectAllPayOrder" resultMap="BaseResultMap">
+    SELECT
+    a.*,TIMESTAMPDIFF(MINUTE ,a.create_time,NOW())
+    FROM
+    item_kill_success as a
+    WHERE
+    a.status = 0
+  </select>
+
 
 </mapper>

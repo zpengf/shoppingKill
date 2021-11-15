@@ -1,6 +1,4 @@
-package com.zpf.shoppingKill.server.config;/**
- * Created by Administrator on 2019/7/2.
- */
+package com.zpf.shoppingKill.server.config;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -12,8 +10,6 @@ import org.springframework.core.env.Environment;
 
 /**
  * ZooKeeper组件自定义配置
- * @Author:debug (SteadyJack)
- * @Date: 2019/7/2 14:38
  **/
 @Configuration
 public class ZooKeeperConfig {

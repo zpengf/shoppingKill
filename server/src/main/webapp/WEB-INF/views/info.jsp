@@ -58,7 +58,7 @@
                     alert(res.msg);
                     window.location.href="${ctx}/kill/execute/success"
                 }else{
-                    //alert(res.msg);
+                    alert(res.msg);
                     window.location.href="${ctx}/kill/execute/fail"
                 }
             },

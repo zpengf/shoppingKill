@@ -17,8 +17,45 @@ public class ItemKillSuccess {
 
     private Integer total;
 
+    private String itemName;
+    private String userName;
+    private String email;
+    private Integer timeStampDiff;
+
+    public Integer getTimeStampDiff() {
+        return timeStampDiff;
+    }
+
+    public void setTimeStampDiff(Integer timeStampDiff) {
+        this.timeStampDiff = timeStampDiff;
+    }
+
     public Integer getTotal() {
         return total;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setTotal(Integer total) {

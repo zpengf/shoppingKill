@@ -1,17 +1,10 @@
-package com.zpf.shoppingKill.server.dto;/**
- * Created by Administrator on 2019/6/22.
- */
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+package com.zpf.shoppingKill.server.dto;
+import lombok.*;
 
 import java.io.Serializable;
 
 /**
- * @Author:debug (SteadyJack)
- * @Date: 2019/6/22 10:11
+ * 发送邮件 dto
  **/
 @Data
 @ToString
@@ -22,6 +15,30 @@ public class MailDto implements Serializable{
     private String subject;
     //邮件内容
     private String content;
-    //接收人
+    //接收人 多个
     private String[] tos;
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String[] getTos() {
+        return tos;
+    }
+
+    public void setTos(String[] tos) {
+        this.tos = tos;
+    }
 }
